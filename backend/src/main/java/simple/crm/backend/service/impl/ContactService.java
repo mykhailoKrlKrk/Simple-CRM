@@ -47,6 +47,14 @@ public class ContactService implements GenericService<ContactResponseDto, Contac
                                 new EntityNotFoundException("Can't find contact with id: " + id)));
     }
 
+    public List<ContactResponseDto> getAllContactByClient(Long id) {
+        return contactRepository.findAll()
+                .stream()
+                .filter(ct -> ct.getId().equals(id))
+                .map(contactMapper::toDto)
+                .toList();
+    }
+
     @Override
     public void delete(Long id) {
         getById(id);

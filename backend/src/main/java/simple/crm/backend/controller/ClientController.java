@@ -39,6 +39,11 @@ public class ClientController {
         return clientService.getAll();
     }
 
+    @GetMapping
+    public List<ClientResponseDto> getClientsByArea(@RequestBody String area) {
+        return clientService.getAllClientsBySpecificArea(area);
+    }
+
     @GetMapping("/{id}")
     public ClientResponseDto getClientById(@PathVariable Long id) {
         return clientService.getById(id);
