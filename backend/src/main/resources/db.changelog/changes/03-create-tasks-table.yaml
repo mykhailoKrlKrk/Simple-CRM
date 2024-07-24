@@ -24,7 +24,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: dueDate
+                  name: due_date
                   type: date
                   constraints:
                     nullable: false

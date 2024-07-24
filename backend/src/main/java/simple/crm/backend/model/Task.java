@@ -1,6 +1,15 @@
 package simple.crm.backend.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.time.LocalDate;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
@@ -22,6 +31,7 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Column(name = "due_date")
     private LocalDate dueDate;
 
     @ManyToOne
@@ -34,7 +44,6 @@ public class Task {
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
-
 
     public enum Status {
         OPEN,
