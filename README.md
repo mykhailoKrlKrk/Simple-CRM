@@ -20,7 +20,7 @@
 - **Search Functionality**:
   - Search for clients and contacts based on various criteria.
 
-## Technical Requirements
+## Technical Features
 
 - **Spring Boot**: Core framework for building the application.
 - **Spring Data JPA**: For ORM and database interactions with PostgreSQL.
@@ -28,11 +28,11 @@
 - **Spring Security**: To handle authentication and authorization.
 - **Frontend**: Implemented using either Thymeleaf or React.
 - **Testing**: Unit and integration tests to cover key functionality.
-
-## Additional Features
-
+  
 - **API Integration**: Implement API endpoints for interacting with external systems.
 - **Data Export**: Functionality to export data to Excel or PDF formats.
 - **Logging**: Set up logging using ELK stack or similar technologies.
+
+
 
 
