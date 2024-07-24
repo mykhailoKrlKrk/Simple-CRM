@@ -1,6 +1,5 @@
 package simple.crm.backend.mapper;
 
-
 import org.mapstruct.Mapper;
 import simple.crm.backend.config.MapperConfig;
 import simple.crm.backend.dto.task.TaskRequestDto;
