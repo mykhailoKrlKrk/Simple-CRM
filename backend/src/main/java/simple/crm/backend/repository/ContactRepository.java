@@ -6,4 +6,5 @@ import simple.crm.backend.model.Contact;
 
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Long> {
+
 }

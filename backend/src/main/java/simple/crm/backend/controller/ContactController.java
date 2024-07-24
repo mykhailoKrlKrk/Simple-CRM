@@ -28,6 +28,11 @@ public class ContactController {
         return contactService.create(client);
     }
 
+    @GetMapping("/{clientId}")
+    List<ContactResponseDto> getAllContactsByClient(@PathVariable Long clientId) {
+        return contactService.getAllContactByClient(clientId);
+    }
+
     @PutMapping("/{id}")
     public ContactResponseDto updateContactInfo(@PathVariable Long id,
                                                 @RequestBody ContactRequestDto request) {

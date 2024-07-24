@@ -47,6 +47,14 @@ public class TaskService implements GenericService<TaskResponseDto, TaskRequestD
                                 new EntityNotFoundException("Can't find task with id: " + id)));
     }
 
+    public List<TaskResponseDto> getAllTasksByContact(Long id) {
+        return taskRepository.findAll()
+                .stream()
+                .filter(ts -> ts.getId().equals(id))
+                .map(taskMapper::toDto)
+                .toList();
+    }
+
     @Override
     public void delete(Long id) {
         getById(id);

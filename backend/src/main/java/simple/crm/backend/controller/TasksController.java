@@ -34,6 +34,11 @@ public class TasksController {
         return taskService.update(id, request);
     }
 
+    @GetMapping("/{contactId}")
+    public List<TaskResponseDto> getAllTasksByContact(@PathVariable Long contactId) {
+        return taskService.getAllTasksByContact(contactId);
+    }
+
     @GetMapping
     public List<TaskResponseDto> getAllTasks() {
         return taskService.getAll();

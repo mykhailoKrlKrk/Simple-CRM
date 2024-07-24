@@ -23,6 +23,12 @@ public class ClientService implements GenericService<ClientResponseDto, ClientRe
         return clientMapper.toDto(clientRepository.save(client));
     }
 
+    public List<ClientResponseDto> getAllClientsBySpecificArea(String area) {
+        return clientRepository.getAllClientsFromSpecificArea(area).stream()
+                .map(clientMapper::toDto)
+                .toList();
+    }
+
     @Override
     public ClientResponseDto update(Long id, ClientRequestDto request) {
         clientRepository.findById(id).orElseThrow(() ->
