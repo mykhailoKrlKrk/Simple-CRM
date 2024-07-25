@@ -27,21 +27,24 @@ public class ReportController {
     private final TaskService taskService;
 
     @GetMapping("/allClientsExel")
-    public ResponseEntity<ByteArrayResource> getClientsReport() throws IOException, IllegalAccessException {
+    public ResponseEntity<ByteArrayResource> getClientsReport()
+            throws IOException, IllegalAccessException {
         List<ClientResponseDto> clients = clientService.getAll();
         return exelConvertService.generateExcelResponse(clients, ClientResponseDto.class,
                 "clients_report.xlsx");
     }
 
     @GetMapping("/allContactsExel")
-    public ResponseEntity<ByteArrayResource> getContactsReport() throws IOException, IllegalAccessException {
+    public ResponseEntity<ByteArrayResource> getContactsReport()
+            throws IOException, IllegalAccessException {
         List<ContactResponseDto> contacts = contactService.getAll();
         return exelConvertService.generateExcelResponse(contacts, ContactResponseDto.class,
                 "contacts_report.xlsx");
     }
 
     @GetMapping("/allTasksExel")
-    public ResponseEntity<ByteArrayResource> getTasksReport() throws IOException, IllegalAccessException {
+    public ResponseEntity<ByteArrayResource> getTasksReport()
+            throws IOException, IllegalAccessException {
         List<TaskResponseDto> tasks = taskService.getAll();
         return exelConvertService.generateExcelResponse(tasks, TaskResponseDto.class,
                 "tasks_report.xlsx");

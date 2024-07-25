@@ -17,7 +17,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExelConvertService {
 
-    public <T> ByteArrayResource exportToExcel(List<T> dataList, Class<T> clazz) throws IOException, IllegalAccessException {
+    public <T> ByteArrayResource exportToExcel(List<T> dataList, Class<T> clazz)
+            throws IOException, IllegalAccessException {
+
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet(clazz.getSimpleName() + " Data");
 
@@ -44,13 +46,16 @@ public class ExelConvertService {
         return new ByteArrayResource(out.toByteArray());
     }
 
-    public <T> ResponseEntity<ByteArrayResource> generateExcelResponse(List<T> dataList, Class<T> clazz, String filename) throws IOException, IllegalAccessException {
+    public <T> ResponseEntity<ByteArrayResource> generateExcelResponse(List<T> dataList,
+                                                                       Class<T> clazz,
+                                                                       String filename)
+            throws IOException, IllegalAccessException {
+
         ByteArrayResource resource = exportToExcel(dataList, clazz);
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
-                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
-                .contentLength(resource.contentLength())
-                .body(resource);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename="
+                        + filename).contentType(MediaType.parseMediaType(
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                .contentLength(resource.contentLength()).body(resource);
     }
 }
