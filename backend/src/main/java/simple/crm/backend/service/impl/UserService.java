@@ -1,4 +1,4 @@
-package simple.crm.backend.service.user;
+package simple.crm.backend.service.impl;
 
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +13,12 @@ import simple.crm.backend.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
     private final RoleService roleService;
 
-    @Override
     public UserResponseDto register(UserRegistrationRequestDto request) {
         User user = userMapper.toModel(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
