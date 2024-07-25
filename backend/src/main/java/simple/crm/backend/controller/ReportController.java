@@ -29,31 +29,38 @@ public class ReportController {
     @GetMapping("/allClientsExel")
     public ResponseEntity<ByteArrayResource> getClientsReport() throws IOException, IllegalAccessException {
         List<ClientResponseDto> clients = clientService.getAll();
-        return exelConvertService.generateExcelResponse(clients, ClientResponseDto.class, "clients_report.xlsx");
+        return exelConvertService.generateExcelResponse(clients, ClientResponseDto.class,
+                "clients_report.xlsx");
     }
 
     @GetMapping("/allContactsExel")
     public ResponseEntity<ByteArrayResource> getContactsReport() throws IOException, IllegalAccessException {
         List<ContactResponseDto> contacts = contactService.getAll();
-        return exelConvertService.generateExcelResponse(contacts, ContactResponseDto.class, "contacts_report.xlsx");
+        return exelConvertService.generateExcelResponse(contacts, ContactResponseDto.class,
+                "contacts_report.xlsx");
     }
 
     @GetMapping("/allTasksExel")
     public ResponseEntity<ByteArrayResource> getTasksReport() throws IOException, IllegalAccessException {
         List<TaskResponseDto> tasks = taskService.getAll();
-        return exelConvertService.generateExcelResponse(tasks, TaskResponseDto.class, "tasks_report.xlsx");
+        return exelConvertService.generateExcelResponse(tasks, TaskResponseDto.class,
+                "tasks_report.xlsx");
     }
 
     @GetMapping("/allContactsByClientExel/{id}")
-    public ResponseEntity<ByteArrayResource> getAllContactsByClientReport(@PathVariable Long id) throws IOException, IllegalAccessException {
+    public ResponseEntity<ByteArrayResource> getAllContactsByClientReport(@PathVariable Long id)
+            throws IOException, IllegalAccessException {
         List<ContactResponseDto> contacts = contactService.getAllContactByClient(id);
-        return exelConvertService.generateExcelResponse(contacts, ContactResponseDto.class, "allContactsByClient_report.xlsx");
+        return exelConvertService.generateExcelResponse(contacts, ContactResponseDto.class,
+                "allContactsByClient_report.xlsx");
     }
 
     @GetMapping("/allTasksByContactExel/{id}")
-    public ResponseEntity<ByteArrayResource> getAllTasksByContactReport(@PathVariable Long id) throws IOException, IllegalAccessException {
+    public ResponseEntity<ByteArrayResource> getAllTasksByContactReport(@PathVariable Long id)
+            throws IOException, IllegalAccessException {
         List<TaskResponseDto> tasksByContact = taskService.getAllTasksByContact(id);
-        return exelConvertService.generateExcelResponse(tasksByContact, TaskResponseDto.class, "allTasksByContact_report.xlsx");
+        return exelConvertService.generateExcelResponse(tasksByContact, TaskResponseDto.class,
+                "allTasksByContact_report.xlsx");
     }
 }
 
