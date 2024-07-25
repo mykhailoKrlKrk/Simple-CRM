@@ -2,6 +2,9 @@ package simple.crm.backend.controller;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,28 +32,33 @@ public class TasksController {
     }
 
     @PutMapping("/{id}")
+    @CachePut(cacheNames = "TaskResponse", key = "#id")
     public TaskResponseDto updateTaskInfo(@PathVariable Long id,
                                           @RequestBody TaskRequestDto request) {
         return taskService.update(id, request);
     }
 
     @GetMapping("/{contactId}")
+    @Cacheable(value = "TaskResponse", key = "#contactId")
     public List<TaskResponseDto> getAllTasksByContact(@PathVariable Long contactId) {
         return taskService.getAllTasksByContact(contactId);
     }
 
     @GetMapping
+    @Cacheable(value = "TaskResponse", key = "'allTasks'")
     public List<TaskResponseDto> getAllTasks() {
         return taskService.getAll();
     }
 
     @GetMapping("/{id}")
+    @Cacheable(value = "TaskResponse", key = "#id")
     public TaskResponseDto getTaskById(@PathVariable Long id) {
         return taskService.getById(id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CacheEvict(cacheNames = "TaskResponse", key = "#id", beforeInvocation = true)
     public void deleteTask(@PathVariable Long id) {
         taskService.delete(id);
     }
