@@ -2,6 +2,7 @@ package simple.crm.backend.dto.task;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -9,7 +10,7 @@ import simple.crm.backend.model.Task;
 
 @Data
 @Accessors(chain = true)
-public class TaskRequestDto {
+public class TaskRequestDto implements Serializable {
     @NotEmpty
     private String description;
     @NotNull

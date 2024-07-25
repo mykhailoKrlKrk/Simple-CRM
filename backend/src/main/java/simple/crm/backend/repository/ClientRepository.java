@@ -10,6 +10,7 @@ import simple.crm.backend.model.Client;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    @Query("SELECT cl FROM Client cl WHERE cl.area == :area AND cl.isDeleted = false")
+    @Query("SELECT cl FROM Client cl WHERE cl.area = :area AND cl.isDeleted = false")
     List<Client> getAllClientsFromSpecificArea(@Param("area") String area);
+
 }

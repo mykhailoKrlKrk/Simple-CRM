@@ -40,6 +40,7 @@ public class ClientService implements GenericService<ClientResponseDto, ClientRe
 
     @Override
     public List<ClientResponseDto> getAll() {
+        System.out.println("Called DB");
         return clientRepository.findAll().stream()
                 .map(clientMapper::toDto)
                 .toList();

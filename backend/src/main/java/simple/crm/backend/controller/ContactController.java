@@ -2,6 +2,9 @@ package simple.crm.backend.controller;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,23 +37,27 @@ public class ContactController {
     }
 
     @PutMapping("/{id}")
+    @CachePut(cacheNames = "ContactResponse", key = "#id")
     public ContactResponseDto updateContactInfo(@PathVariable Long id,
                                                 @RequestBody ContactRequestDto request) {
         return contactService.update(id, request);
     }
 
     @GetMapping
+    @Cacheable(value = "ContactResponse", key = "'allContacts'")
     public List<ContactResponseDto> getAllContacts() {
         return contactService.getAll();
     }
 
     @GetMapping("/{id}")
+    @Cacheable(value = "ContactResponse", key = "'contactById'")
     public ContactResponseDto getContactById(@PathVariable Long id) {
         return contactService.getById(id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CacheEvict(cacheNames = "ContactResponse", key = "#id", beforeInvocation = true)
     public void deleteContact(@PathVariable Long id) {
         contactService.delete(id);
     }
