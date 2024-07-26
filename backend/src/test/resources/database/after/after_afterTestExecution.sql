@@ -1,0 +1,9 @@
+DELETE FROM user_roles;
+DELETE FROM users;
+DELETE FROM clients;
+DELETE FROM contacts;
+DELETE FROM tasks;
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+ALTER SEQUENCE clients_id_seq RESTART WITH 1;
+ALTER SEQUENCE contacts_id_seq RESTART WITH 1;
+ALTER SEQUENCE tasks_id_seq RESTART WITH 1;

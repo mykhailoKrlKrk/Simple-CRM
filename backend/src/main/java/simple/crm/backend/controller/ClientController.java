@@ -1,5 +1,7 @@
 package simple.crm.backend.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
@@ -24,16 +26,19 @@ import simple.crm.backend.service.impl.ClientService;
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = "ClientResponse")
 @RequestMapping(value = "/clients")
+@Tag(name = "Clients management", description = "Endpoints for managing clients")
 public class ClientController {
     private final ClientService clientService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create client")
     public ClientResponseDto createClient(@RequestBody ClientRequestDto client) {
         return clientService.create(client);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update client")
     @CachePut(cacheNames = "ClientResponse", key = "#id")
     public ClientResponseDto updateClientInfo(@PathVariable Long id,
                                               @RequestBody ClientRequestDto request) {
@@ -41,18 +46,21 @@ public class ClientController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all clients")
     @Cacheable(value = "ClientResponse", key = "'allClients'")
     public List<ClientResponseDto> getAllClients() {
         return clientService.getAll();
     }
 
-    @GetMapping("/area")
-    @Cacheable(value = "ClientResponse", key = "area")
-    public List<ClientResponseDto> getClientsByArea(@RequestBody String area) {
+    @GetMapping("/area/{area}")
+    @Operation(summary = "Get all clients by area")
+    @Cacheable(value = "ClientResponse", key = "#area")
+    public List<ClientResponseDto> getClientsByArea(@PathVariable String area) {
         return clientService.getAllClientsBySpecificArea(area);
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get client by id")
     @Cacheable(value = "ClientResponse", key = "#id")
     public ClientResponseDto getClientById(@PathVariable Long id) {
         return clientService.getById(id);
@@ -60,6 +68,7 @@ public class ClientController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete client")
     @CacheEvict(cacheNames = "ClientResponse", key = "#id", beforeInvocation = true)
     public void deleteClient(@PathVariable Long id) {
         clientService.delete(id);

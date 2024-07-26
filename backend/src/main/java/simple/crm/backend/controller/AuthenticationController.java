@@ -1,5 +1,7 @@
 package simple.crm.backend.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,16 +20,19 @@ import simple.crm.backend.service.impl.UserService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
+@Tag(name = "Authentication management", description = "Endpoints for login/register operations")
 public class AuthenticationController {
     private final UserService userService;
     private final AuthenticationService authenticationService;
 
     @PostMapping("/login")
+    @Operation(summary = "Login as a user")
     public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto request) {
         return authenticationService.authenticate(request);
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Register a new user")
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDto register(@RequestBody @Valid UserRegistrationRequestDto request) {
         return userService.register(request);
