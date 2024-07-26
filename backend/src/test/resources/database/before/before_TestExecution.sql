@@ -1,3 +1,8 @@
+DELETE FROM user_roles;
+DELETE FROM users;
+
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+
 INSERT INTO users(email, password, first_name, last_name)
 VALUES ('bob@mail.com', '$2a$10$CtLjhhrX8/0Mzo56epKKneiOnMg8KY3LqjBgm.JHDMz5ci25Goi1S', 'Bob', 'Marly');
 
