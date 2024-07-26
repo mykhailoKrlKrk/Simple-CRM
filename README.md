@@ -38,10 +38,10 @@ The main framework of the project is Spring Boot which provides various tools fo
 ---
 List of technologies required for use: 
 
-- Docker
-- PostgreSQL
-- Redis
-- Additional: Postman (for testing endpoints)  
+- [Docker](https://docs.docker.com/engine/install/)
+- [PostgreSQL](https://www.postgresql.org/download/)
+- [Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/)
+- Additional: [Postman](https://www.postman.com/downloads/) (for testing endpoints)  
 #### 🚀 Run Project
 
 Please make sure that you have all the required technologies installed before proceeding. Once that's done, follow the steps below:
