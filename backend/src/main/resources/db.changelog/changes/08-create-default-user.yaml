@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-default-user
+      author: mykhailoKrk
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: email
+                  value: "test@mail.com"
+              - column:
+                  name: password
+                  value: "$2a$10$CtLjhhrX8/0Mzo56epKKneiOnMg8KY3LqjBgm.JHDMz5ci25Goi1S"
+              - column:
+                  name: first_name
+                  value: "Pan"
+              - column:
+                  name: last_name
+                  value: "Stepan"
+
+
