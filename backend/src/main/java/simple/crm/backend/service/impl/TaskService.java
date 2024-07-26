@@ -50,7 +50,7 @@ public class TaskService implements GenericService<TaskResponseDto, TaskRequestD
     public List<TaskResponseDto> getAllTasksByContact(Long id) {
         return taskRepository.findAll()
                 .stream()
-                .filter(ts -> ts.getId().equals(id))
+                .filter(ts -> ts.getContactId().equals(id))
                 .map(taskMapper::toDto)
                 .toList();
     }

@@ -1,5 +1,7 @@
 package simple.crm.backend.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
@@ -22,35 +24,41 @@ import simple.crm.backend.service.impl.TaskService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/tasks")
+@Tag(name = "Tasks management", description = "Endpoints for managing tasks")
 public class TasksController {
     private final TaskService taskService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create task")
     public TaskResponseDto createTask(@RequestBody TaskRequestDto client) {
         return taskService.create(client);
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update task")
     @CachePut(cacheNames = "TaskResponse", key = "#id")
     public TaskResponseDto updateTaskInfo(@PathVariable Long id,
                                           @RequestBody TaskRequestDto request) {
         return taskService.update(id, request);
     }
 
-    @GetMapping("/{contactId}")
+    @GetMapping("/contact/{contactId}")
+    @Operation(summary = "Get all tasks by contact")
     @Cacheable(value = "TaskResponse", key = "#contactId")
     public List<TaskResponseDto> getAllTasksByContact(@PathVariable Long contactId) {
         return taskService.getAllTasksByContact(contactId);
     }
 
     @GetMapping
+    @Operation(summary = "Get all tasks")
     @Cacheable(value = "TaskResponse", key = "'allTasks'")
     public List<TaskResponseDto> getAllTasks() {
         return taskService.getAll();
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get task by id")
     @Cacheable(value = "TaskResponse", key = "#id")
     public TaskResponseDto getTaskById(@PathVariable Long id) {
         return taskService.getById(id);
@@ -58,6 +66,7 @@ public class TasksController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete task")
     @CacheEvict(cacheNames = "TaskResponse", key = "#id", beforeInvocation = true)
     public void deleteTask(@PathVariable Long id) {
         taskService.delete(id);

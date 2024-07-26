@@ -24,7 +24,7 @@ public class ClientService implements GenericService<ClientResponseDto, ClientRe
     }
 
     public List<ClientResponseDto> getAllClientsBySpecificArea(String area) {
-        return clientRepository.getAllClientsFromSpecificArea(area).stream()
+        return clientRepository.getClientsByArea(area).stream()
                 .map(clientMapper::toDto)
                 .toList();
     }
